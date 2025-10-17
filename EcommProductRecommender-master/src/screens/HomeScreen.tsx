@@ -48,15 +48,14 @@ function StateCard({
         </View>
 
         <Text style={styles.stateTitle}>
-          {title ? title : (variant === 'error' ? 'Failed to load content' : 'No results found')}
+          {title ?? (variant === 'error' ? 'Failed to load content' : 'No results found')}
         </Text>
 
         <Text style={styles.stateMessage}>
-          {message
-            ? message
-            : variant === 'error'
-            ? 'Something went wrong while loading the search results. Please check your connection and try again.'
-            : 'We couldn’t find any products that match your search. Try a different keyword.'}
+          {message ??
+            (variant === 'error'
+              ? 'Something went wrong while loading the search results. Please check your connection and try again.'
+              : 'We couldn’t find any products that match your search. Try a different keyword.')}
         </Text>
 
         <TouchableOpacity

@@ -145,24 +145,29 @@ class SearchResponse(BaseModel):
 
 # --- Helper Functions ---
 def get_model_and_mappings_for_key(api_key: str):
-    if api_key not in API_KEYS_DB or \
-       not os.path.exists(API_KEYS_DB[api_key].get("model_path", "")) or \
-       not os.path.exists(API_KEYS_DB[api_key].get("mappings_path", "")):
-        raise HTTPException(status_code=404, detail="Model or mappings not found for this API key. Ensure the model is trained or paths are correct.")
+    if api_key not in API_KEYS_DB:
+        raise HTTPException(status_code=404, detail="API key not found.")
 
     model_data = API_KEYS_DB[api_key]
-    try:
-        if not os.path.exists(model_data["model_path"]):
-            raise HTTPException(status_code=404, detail=f"Model file not found at {model_data['model_path']}")
-        if not os.path.exists(model_data["mappings_path"]):
-            raise HTTPException(status_code=404, detail=f"Mappings file not found at {model_data['mappings_path']}")
+    model_path = model_data.get("model_path")
+    mappings_path = model_data.get("mappings_path")
 
-        model = load_model(model_data["model_path"])
-        user_map, item_map = load_mappings(model_data["mappings_path"])
+    if not model_path or not os.path.exists(model_path):
+        raise HTTPException(status_code=404, detail=f"Model file not found for this API key. Path: {model_path}")
+    if not mappings_path or not os.path.exists(mappings_path):
+        raise HTTPException(status_code=404, detail=f"Mappings file not found for this API key. Path: {mappings_path}")
+
+    try:
+        model = load_model(model_path)
+        user_map, item_map = load_mappings(mappings_path)
         idx_to_item_map = {idx: item_id for item_id, idx in item_map.items()}
-        return model, user_map, item_map, idx_to_item_map, model_data.get("num_users"), model_data.get("num_items")
+
+        num_users = model_data.get("num_users")
+        num_items = model_data.get("num_items")
+
+        return model, user_map, item_map, idx_to_item_map, num_users, num_items
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error loading model/mappings: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error loading model or mappings: {str(e)}")
 
 # --- NEW: Helper function to search products in the database ---
 def search_products_in_db(query_term: str):
