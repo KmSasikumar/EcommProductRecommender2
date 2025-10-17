@@ -1,0 +1,31 @@
+# Python / env
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Databases / local data
+*.db
+src/*.db
+user_interactions.db
+
+# Models (ignore unless you opt into Git LFS)
+models_store/
+src/models_store/
+*.h5
+*.hdf5
+
+# Python packaging / build
+build/
+dist/
+*.egg-info/
+
+# logs
+*.log
+node_modules
