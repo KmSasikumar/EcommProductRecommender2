@@ -203,16 +203,10 @@ EcommProductRecommender2/
 
 ---
 
-## 🧾 License
-
-This project is licensed under the **MIT License** — feel free to use, modify, and distribute it.
-
----
-
 ## 💡 Author
 
 👤 **K. Sasi Kumar**
-📧 Email: [[your-email@example.com](mailto:your-email@example.com)]
+📧 Email: [kommamani012@gmail.com](mailto:kommamani012@gmail.com)]
 🏫 VIT Bhopal University
 🌐 GitHub: [KmSasikumar](https://github.com/KmSasikumar)
 
