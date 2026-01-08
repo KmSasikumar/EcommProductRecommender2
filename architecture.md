@@ -134,7 +134,7 @@ The recommendation engine is a **Neural Collaborative Filtering** model consisti
 
 ```mermaid
 graph TD
-    Input[Input Layer: User ID & Item ID] --> Emb_GMF[GMF Embeddings]
+    Input["Input Layer: User ID & Item ID"] --> Emb_GMF[GMF Embeddings]
     Input --> Emb_MLP[MLP Embeddings]
 
     subgraph GMF_Path [Generalized Matrix Factorization]
@@ -150,5 +150,5 @@ graph TD
 
     Dot --> Merge[Concatenate Paths]
     Dense3 --> Merge
-    Merge --> Output[Sigmoid Output (Score 0-1)]
+    Merge --> Output["Sigmoid Output (Score 0-1)"]
 ```
