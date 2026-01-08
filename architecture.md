@@ -23,7 +23,7 @@ graph TD
 
     subgraph Data_Layer [💾 Data Persistence]
         SQLite[(SQLite DB)]
-        FS[File System\n(Models & Mappings)]
+        FS["File System<br/>(Models & Mappings)"]
     end
 
     subgraph ML_Engine [🧠 AI Core]
